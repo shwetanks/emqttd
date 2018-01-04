@@ -417,11 +417,15 @@ vm(_) ->
 %%--------------------------------------------------------------------
 %% @doc mnesia Command
 
-mnesia([]) ->
+mnesia(["info"]) ->
     mnesia:system_info();
 
+mnesia(["dump"]) ->
+	mnesia:dump_to_textfile("/usr/local/shwetank/installs/emqtt_revs/dumps/dump.txt");
+
 mnesia(_) ->
-    ?PRINT_CMD("mnesia", "Mnesia system info").
+	?USAGE([{"mnesia info",            "Mnesia system info"},
+			{"mnesia dump", "Dump Mnesia local tables in given text file"}]).
 
 %%--------------------------------------------------------------------
 %% @doc Trace Command
